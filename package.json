@@ -1,0 +1,47 @@
+{
+  "name": "tangocho-node",
+  "version": "1.0.0",
+  "description": "tangocho on node",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "prettier-eslint --write ./*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayugtech/tangocho_node.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@line/bot-sdk": "^6.8.0",
+    "body-parser": "1.15.0",
+    "cors": "2.7.1",
+    "dotenv": "2.0.0",
+    "ejs": "2.4.1",
+    "errorhandler": "1.4.3",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "express": "4.13.4",
+    "express-jwt": "3.3.0",
+    "express-session": "1.13.0",
+    "jsonwebtoken": "7.1.9",
+    "method-override": "2.3.5",
+    "methods": "1.1.2",
+    "mongoose": "4.4.10",
+    "mongoose-unique-validator": "1.0.2",
+    "morgan": "1.7.0",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "prettier-eslint": "^9.0.0",
+    "prettier-eslint-cli": "^5.0.0",
+    "request": "2.69.0",
+    "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
