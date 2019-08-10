@@ -15,6 +15,6 @@
         "ecmaVersion": 2018
     },
     "rules": {
-        "node/no-unsupported-features": ["error", {"version": 8}]
+        "node/no-unsupported-features": ["error", {"version": 12}]
     }
 }

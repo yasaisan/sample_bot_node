@@ -17,6 +17,15 @@ npm run dev
 
 ## Heroku 環境更新手順
 
+下記のConfig Varsを登録する
+
+```
+LINE_ACCESS_TOKEN
+LINE_CHANNEL_SECRET
+MONGODB_URI
+SECRET
+```
+
 ```
 git push heroku master
 ```

@@ -1,28 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TangochoHeader />
+    <router-view></router-view>
+    <TangochoFooter />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TangochoHeader from "@/components/TheHeader";
+import TangochoFooter from "@/components/TheFooter";
 export default {
-  name: 'app',
+  name: "App",
   components: {
-    HelloWorld
+    TangochoHeader,
+    TangochoFooter
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
