@@ -1,7 +1,6 @@
 {
     "env": {
-        "commonjs": true,
-        "es6": true
+        "node": true
     },
     "plugins": ["node"],
     "extends": [
@@ -12,10 +11,10 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
+        "parser": "babel-eslint",
         "ecmaVersion": 2018
     },
     "rules": {
         "node/no-unsupported-features": ["error", {"version": 8}]
-        "no-param-reassign": false
     }
 }

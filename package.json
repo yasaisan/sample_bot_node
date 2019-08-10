@@ -7,7 +7,8 @@
     "start": "node ./app.js",
     "dev": "nodemon ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "prettier-eslint --write ./*"
+    "lint": "prettier-eslint --write ./*",
+    "postinstall": "vue-cli-service build --dest dist"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,6 @@
     "dotenv": "2.0.0",
     "ejs": "2.4.1",
     "errorhandler": "1.4.3",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-prettier": "^3.1.0",
     "express": "4.13.4",
     "express-jwt": "3.3.0",
     "express-session": "1.13.0",
@@ -37,11 +36,35 @@
     "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "request": "2.69.0",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "axios": "^0.19.0",
+    "date-fns": "^1.30.1",
+    "marked": "^0.7.0",
+    "register-service-worker": "^1.6.2",
+    "vue": "^2.6.10",
+    "vue-axios": "^2.1.4",
+    "vue-router": "^3.1.1",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-eslint": "^3.10.0",
+    "@vue/cli-plugin-pwa": "^3.10.0",
+    "@vue/cli-plugin-unit-jest": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.8.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "lint-staged": "^8.2.1",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.10"
   }
 }

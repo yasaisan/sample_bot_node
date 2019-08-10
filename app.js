@@ -15,6 +15,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 // Create global app object
 const app = express();
 
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 app.use(cors());
 
 // Normal express config defaults

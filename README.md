@@ -9,7 +9,9 @@
 
 ```
 npm install -g nodemon
+npm install -g vue-cli
 npm install
+npm run postinstall
 npm run dev
 ```
 

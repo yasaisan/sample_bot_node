@@ -36,3 +36,6 @@ node_modules
 
 # 環境情報(プライベートリポジトリなんで残しとく)
 .env
+
+# Vue.js compiled output
+/dist
