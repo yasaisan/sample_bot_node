@@ -95,7 +95,7 @@ function getAccessToken(callback) {
 
   request(options, function (err, res) {
       if (err) {
-          console.log(err);
+          console.log('getToken error = ', err);
           callback(err, null);
       } else
           callback(null, res.body);
@@ -123,9 +123,10 @@ function translate(token, text, callback) {
 
   request(options, function (err, res) {
       if (err) {
-          console.log(err);
+          console.log('translate error = ', err);
           callback(err, null);
       } else
+          console.log('res = ', res);
           callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
   });
 }
