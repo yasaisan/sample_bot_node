@@ -38,17 +38,18 @@ function handleEvent(event) {
 
   // 実行
   translateText = '';
-  getAccessToken(function (err, token) {
+  return getAccessToken(function (err, token) {
     if (!err) {
       // console.log(token);
       translate(token, event.message.text, (err, translated) => {
-        if (!err)
+        if (!err) {
           console.log('TransLate == ', event.message.text, '->', translated);
           translateText = translated;
-          // return client.replyMessage(event.replyToken, {
-          //   type: 'text',
-          //   text: translateText,
-          // });
+          client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: translateText,
+          });
+        }
       });
     }
   });
@@ -62,10 +63,10 @@ function handleEvent(event) {
 
 
 
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: event.message.text,
-  });
+  // return client.replyMessage(event.replyToken, {
+  //   type: 'text',
+  //   text: event.message.text,
+  // });
 }
 
 router.post('/', (req, res) => {
