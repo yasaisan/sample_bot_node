@@ -38,20 +38,20 @@ function handleEvent(event) {
 
   // 実行
   translateText = '';
-  getAccessToken(function (err, token) {
-    if (!err) {
-        // console.log(token);
-        translate(token, event.message.text, (err, translated) => {
-            if (!err)
-                console.log('TransLate == ', event.message.text, '->', translated);
-                translateText = translated;
-                return client.replyMessage(event.replyToken, {
-                  type: 'text',
-                  text: translateText,
-                });
-        });
-    }
-  });
+  // getAccessToken(function (err, token) {
+  //   if (!err) {
+  //     // console.log(token);
+  //     translate(token, event.message.text, (err, translated) => {
+  //       if (!err)
+  //         console.log('TransLate == ', event.message.text, '->', translated);
+  //         translateText = translated;
+  //         return client.replyMessage(event.replyToken, {
+  //           type: 'text',
+  //           text: translateText,
+  //         });
+  //     });
+  //   }
+  // });
 
 
   // console.log('Text == ', translateText);
@@ -62,10 +62,10 @@ function handleEvent(event) {
 
 
 
-  // return client.replyMessage(event.replyToken, {
-  //   type: 'text',
-  //   text: translateText,
-  // });
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: event.message.text,
+  });
 }
 
 router.post('/', (req, res) => {
@@ -86,23 +86,24 @@ module.exports = router;
 function getAccessToken(callback) {
   key = '351118560b1a45929f0d91492722b4af';
   let headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/jwt',
-      'Ocp-Apim-Subscription-Key': key
+    'Content-Type': 'application/json',
+    'Accept': 'application/jwt',
+    'Ocp-Apim-Subscription-Key': key
   };
   let options = {
-      url: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
-      method: 'POST',
-      headers: headers,
-      json: true
+    url: 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken',
+    method: 'POST',
+    headers: headers,
+    json: true
   };
 
   request(options, function (err, res) {
-      if (err) {
-          console.log('getToken error = ', err);
-          callback(err, null);
-      } else
-          callback(null, res.body);
+    if (err) {
+      console.log('getToken error = ', err);
+      callback(err, null);
+    } else {
+      callback(null, res.body);
+    }
   });
 }
 
@@ -117,23 +118,24 @@ function translate(token, text, callback) {
 
   let url = base_url + '?appid=' + appid + '&text=' + text + '&from=' + from + '&to=' + to;
   let headers = {
-      'Accept': 'application/xml'
+    'Accept': 'application/xml'
   };
   console.log('url = ', url);
   let options = {
-      url: encodeURI(url),
-      method: 'get',
-      headers: headers,
-      json: true
+    url: encodeURI(url),
+    method: 'get',
+    headers: headers,
+    json: true
   };
 
   request(options, function (err, res) {
-      if (err) {
-          console.log('translate error = ', err);
-          callback(err, null);
-      } else
-          // console.log('res = ', res);
-          callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+    if (err) {
+      console.log('translate error = ', err);
+      callback(err, null);
+    } else {
+      // console.log('res = ', res);
+      callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+    }
   });
 }
 
