@@ -18,7 +18,8 @@ function handleEvent(event) {
     return;
   }
 
-  console.log('handleEvent');
+  // console.log('handleEvent', );
+  console.error('replyMessage = ', event.message.text);
   return client.replyMessage(event.replyToken, {
     type: 'text',
     text: event.message.text,
