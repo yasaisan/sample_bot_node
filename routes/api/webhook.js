@@ -38,27 +38,20 @@ function handleEvent(event) {
 
   // 実行
   translateText = '';
-  translateAccessToken = getAccessToken();
-  console.log('translateAccessToken == ', translateAccessToken);
-  if (translateAccessToken) {
-    translatateText = translate(translateAccessToken, event.message.text);
-  }
-  console.log('transLateText == ', event.message.text, '->', translatateText);
-
-  // getAccessToken(function (err, token) {
-  //   if (!err) {
-  //     // console.log(token);
-  //     translate(token, event.message.text, (err, translated) => {
-  //       if (!err)
-  //         console.log('TransLate == ', event.message.text, '->', translated);
-  //         translateText = translated;
-  //         // return client.replyMessage(event.replyToken, {
-  //         //   type: 'text',
-  //         //   text: translateText,
-  //         // });
-  //     });
-  //   }
-  // });
+  getAccessToken(function (err, token) {
+    if (!err) {
+      // console.log(token);
+      translate(token, event.message.text, (err, translated) => {
+        if (!err)
+          console.log('TransLate == ', event.message.text, '->', translated);
+          translateText = translated;
+          // return client.replyMessage(event.replyToken, {
+          //   type: 'text',
+          //   text: translateText,
+          // });
+      });
+    }
+  });
 
 
   // console.log('Text == ', translateText);
@@ -71,7 +64,7 @@ function handleEvent(event) {
 
   return client.replyMessage(event.replyToken, {
     type: 'text',
-    text: translatateText,
+    text: event.message.text,
   });
 }
 
@@ -90,8 +83,7 @@ module.exports = router;
  */
 
 // アクセストークン取得
-function getAccessToken() {
-// function getAccessToken(callback) {
+function getAccessToken(callback) {
   key = '351118560b1a45929f0d91492722b4af';
   let headers = {
     'Content-Type': 'application/json',
@@ -108,20 +100,15 @@ function getAccessToken() {
   request(options, function (err, res) {
     if (err) {
       console.log('getToken error = ', err);
-      // callback(err, null);
-      result = false;
+      callback(err, null);
     } else {
-      // callback(null, res.body);
-      result = res.body;
+      callback(null, res.body);
     }
   });
-
-  return result;
 }
 
 // 翻訳 (日本語 -> 英語)
-// function translate(token, text, callback) {
-function translate(token, text) {
+function translate(token, text, callback) {
   let base_url = 'https://api.microsofttranslator.com/v2/http.svc/Translate',
       appid = 'Bearer ' + token,
       // from = 'ja',
@@ -144,15 +131,12 @@ function translate(token, text) {
   request(options, function (err, res) {
     if (err) {
       console.log('translate error = ', err);
-      // callback(err, null);
-      result = false;
+      callback(err, null);
     } else {
       // console.log('res = ', res);
-      // callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
-      result = res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
+      callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
     }
   });
-  return result;
 }
 
 // // 実行
