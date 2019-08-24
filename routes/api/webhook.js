@@ -45,12 +45,16 @@ function handleEvent(event) {
             if (!err)
                 console.log('TransLate == ', event.message.text, '->', translated);
                 translateText = translated;
+                return client.replyMessage(event.replyToken, {
+                  type: 'text',
+                  text: translateText,
+                });
         });
     }
   });
 
 
-  console.log('Text == ', translateText);
+  // console.log('Text == ', translateText);
 
 
 
@@ -58,10 +62,10 @@ function handleEvent(event) {
 
 
 
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: translateText,
-  });
+  // return client.replyMessage(event.replyToken, {
+  //   type: 'text',
+  //   text: translateText,
+  // });
 }
 
 router.post('/', (req, res) => {
@@ -107,15 +111,15 @@ function translate(token, text, callback) {
   let base_url = 'https://api.microsofttranslator.com/v2/http.svc/Translate',
       appid = 'Bearer ' + token,
       // from = 'ja',
-      from = 'ja',
-      to = 'en';
+      from = 'en',
+      to = 'ja';
       // to = 'en';
 
   let url = base_url + '?appid=' + appid + '&text=' + text + '&from=' + from + '&to=' + to;
   let headers = {
       'Accept': 'application/xml'
   };
-  // console.log('url = ', url);
+  console.log('url = ', url);
   let options = {
       url: encodeURI(url),
       method: 'get',
