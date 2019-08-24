@@ -107,8 +107,8 @@ function translate(token, text, callback) {
   let base_url = 'https://api.microsofttranslator.com/v2/http.svc/Translate',
       appid = 'Bearer ' + token,
       // from = 'ja',
-      from = 'en',
-      to = 'ja';
+      from = 'ja',
+      to = 'en';
       // to = 'en';
 
   let url = base_url + '?appid=' + appid + '&text=' + text + '&from=' + from + '&to=' + to;
