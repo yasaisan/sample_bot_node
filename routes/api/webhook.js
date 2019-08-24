@@ -4,7 +4,7 @@ const line = require('@line/bot-sdk');
 //翻訳
 const request = require('request');
 const GoogleImages = require('google-images');
-const client = new GoogleImages('016901115011056515106:6pjbegaiuga', 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI');
+const clientImage = new GoogleImages('016901115011056515106:6pjbegaiuga', 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI');
 
 require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
 
@@ -42,7 +42,7 @@ function handleEvent(event) {
   // cse_id = '016901115011056515106:6pjbegaiuga'
 
   // client.search('Mahatma Gandhi', {size: 'large'});
-  client.search(event.message.text);
+  clientImage.search(event.message.text);
 
   // 実行
   translateText = '';
