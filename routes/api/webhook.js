@@ -38,6 +38,13 @@ function handleEvent(event) {
 
   // 実行
   translateText = '';
+  translateAccessToken = getAccessToken();
+  console.log('translateAccessToken == ', translateAccessToken);
+  if (translateAccessToken) {
+    translatateText = translate(translateAccessToken, event.message.text);
+  }
+  console.log('transLateText == ', event.message.text, '->', translatateText);
+
   // getAccessToken(function (err, token) {
   //   if (!err) {
   //     // console.log(token);
@@ -45,10 +52,10 @@ function handleEvent(event) {
   //       if (!err)
   //         console.log('TransLate == ', event.message.text, '->', translated);
   //         translateText = translated;
-  //         return client.replyMessage(event.replyToken, {
-  //           type: 'text',
-  //           text: translateText,
-  //         });
+  //         // return client.replyMessage(event.replyToken, {
+  //         //   type: 'text',
+  //         //   text: translateText,
+  //         // });
   //     });
   //   }
   // });
@@ -64,7 +71,7 @@ function handleEvent(event) {
 
   return client.replyMessage(event.replyToken, {
     type: 'text',
-    text: event.message.text,
+    text: translatateText,
   });
 }
 
@@ -83,7 +90,8 @@ module.exports = router;
  */
 
 // アクセストークン取得
-function getAccessToken(callback) {
+function getAccessToken() {
+// function getAccessToken(callback) {
   key = '351118560b1a45929f0d91492722b4af';
   let headers = {
     'Content-Type': 'application/json',
@@ -100,15 +108,18 @@ function getAccessToken(callback) {
   request(options, function (err, res) {
     if (err) {
       console.log('getToken error = ', err);
-      callback(err, null);
+      // callback(err, null);
+      return false;
     } else {
-      callback(null, res.body);
+      // callback(null, res.body);
+      return res.body;
     }
   });
 }
 
 // 翻訳 (日本語 -> 英語)
-function translate(token, text, callback) {
+// function translate(token, text, callback) {
+function translate(token, text) {
   let base_url = 'https://api.microsofttranslator.com/v2/http.svc/Translate',
       appid = 'Bearer ' + token,
       // from = 'ja',
@@ -131,10 +142,12 @@ function translate(token, text, callback) {
   request(options, function (err, res) {
     if (err) {
       console.log('translate error = ', err);
-      callback(err, null);
+      // callback(err, null);
+      return false;
     } else {
       // console.log('res = ', res);
-      callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+      // callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
+      return res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
     }
   });
 }
