@@ -50,7 +50,7 @@ function handleEvent(event) {
   });
 
 
-
+  console.log('Text == ', translateText);
 
 
 
@@ -115,7 +115,7 @@ function translate(token, text, callback) {
   let headers = {
       'Accept': 'application/xml'
   };
-  console.log('url = ', url);
+  // console.log('url = ', url);
   let options = {
       url: encodeURI(url),
       method: 'get',
