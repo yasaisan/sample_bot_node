@@ -60,7 +60,7 @@ function handleEvent(event) {
 
   return client.replyMessage(event.replyToken, {
     type: 'text',
-    text: event.message.text,
+    text: translateText,
   });
 }
 
@@ -106,14 +106,16 @@ function getAccessToken(callback) {
 function translate(token, text, callback) {
   let base_url = 'https://api.microsofttranslator.com/v2/http.svc/Translate',
       appid = 'Bearer ' + token,
-      from = 'ja',
-      to = 'en';
+      // from = 'ja',
+      from = 'en',
+      to = 'ja';
+      // to = 'en';
 
   let url = base_url + '?appid=' + appid + '&text=' + text + '&from=' + from + '&to=' + to;
   let headers = {
       'Accept': 'application/xml'
   };
-
+  console.log('url = ', url);
   let options = {
       url: encodeURI(url),
       method: 'get',
@@ -126,7 +128,7 @@ function translate(token, text, callback) {
           console.log('translate error = ', err);
           callback(err, null);
       } else
-          console.log('res = ', res);
+          // console.log('res = ', res);
           callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
   });
 }
