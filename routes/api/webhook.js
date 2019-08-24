@@ -109,12 +109,14 @@ function getAccessToken() {
     if (err) {
       console.log('getToken error = ', err);
       // callback(err, null);
-      return false;
+      result = false;
     } else {
       // callback(null, res.body);
-      return res.body;
+      result = res.body;
     }
   });
+
+  return result;
 }
 
 // 翻訳 (日本語 -> 英語)
@@ -143,13 +145,14 @@ function translate(token, text) {
     if (err) {
       console.log('translate error = ', err);
       // callback(err, null);
-      return false;
+      result = false;
     } else {
       // console.log('res = ', res);
       // callback(null, res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''));
-      return res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
+      result = res.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
     }
   });
+  return result;
 }
 
 // // 実行
