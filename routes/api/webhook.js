@@ -3,6 +3,8 @@ const line = require('@line/bot-sdk');
 
 //翻訳
 const request = require('request');
+const GoogleImages = require('google-images');
+const client = new GoogleImages('016901115011056515106:6pjbegaiuga', 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI');
 
 require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
 
@@ -35,6 +37,12 @@ function handleEvent(event) {
   // 翻訳するためのトークンを取得します。有効期限は取得後10分間です
 
   // 翻訳するための文字列を生成します
+
+  // api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
+  // cse_id = '016901115011056515106:6pjbegaiuga'
+
+  // client.search('Mahatma Gandhi', {size: 'large'});
+  client.search(event.message.text);
 
   // 実行
   translateText = '';
