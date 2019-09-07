@@ -43,7 +43,11 @@ function handleEvent(event) {
   // cse_id = '016901115011056515106:6pjbegaiuga'
 
   // client.search('Mahatma Gandhi', {size: 'large'});
-  clientImage.search(event.message.text);
+ 
+ 
+ 
+ 
+  // clientImage.search(event.message.text);
 
   // 実行
   translateText = '';
