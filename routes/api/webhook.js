@@ -63,7 +63,7 @@ function handleEvent(event) {
   //   error => console.log(error)
   //   );
  
-  console.log('image == ', client.search('you', {size: 'large'}));
+  console.log('image == ', clientImage.search('you', {size: 'large'}));
 
   // clientImage.search(event.message.text);
 
