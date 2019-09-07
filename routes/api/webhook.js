@@ -45,7 +45,7 @@ function handleEvent(event) {
   // var api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
   // var cse_id = '016901115011056515106:6pjbegaiuga'
 
-  clientImage.search('Mahatma Gandhi', {size: 'large'})
+  return clientImage.search('Mahatma Gandhi', {size: 'large'})
 	.then(
     images => {
     console.log('url == ', url);
@@ -57,7 +57,12 @@ function handleEvent(event) {
             'context': item.image.contextLink
 		}]
 		 */
-	})
+  }
+  // client.replyMessage(event.replyToken, {
+  //   type: 'text',
+  //   text: translateText,
+  // });
+    )
 	.catch(
     error => console.log(error)
     );
@@ -66,23 +71,23 @@ function handleEvent(event) {
 
   // clientImage.search(event.message.text);
 
-  // 実行
-  translateText = '';
-  return getAccessToken(function (err, token) {
-    if (!err) {
-      // console.log(token);
-      translate(token, event.message.text, (err, translated) => {
-        if (!err) {
-          console.log('TransLate == ', event.message.text, '->', translated);
-          translateText = translated;
-          client.replyMessage(event.replyToken, {
-            type: 'text',
-            text: translateText,
-          });
-        }
-      });
-    }
-  });
+  // // 実行
+  // translateText = '';
+  // return getAccessToken(function (err, token) {
+  //   if (!err) {
+  //     // console.log(token);
+  //     translate(token, event.message.text, (err, translated) => {
+  //       if (!err) {
+  //         console.log('TransLate == ', event.message.text, '->', translated);
+  //         translateText = translated;
+  //         client.replyMessage(event.replyToken, {
+  //           type: 'text',
+  //           text: translateText,
+  //         });
+  //       }
+  //     });
+  //   }
+  // });
 
 
   // console.log('Text == ', translateText);
