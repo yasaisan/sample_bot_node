@@ -45,20 +45,26 @@ function handleEvent(event) {
   // var api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
   // var cse_id = '016901115011056515106:6pjbegaiuga'
 
-  client.search('Mahatma Gandhi', {size: 'large'})
-	.then(images => {
-    console.log('url == ', url);
-		/*
-		[{
-			'url': item.link,
-            'thumbnail':item.image.thumbnailLink,
-            'snippet':item.title,
-            'context': item.image.contextLink
-		}]
-		 */
-	})
-	.catch(error => console.log(error));
+  // client.search('Mahatma Gandhi', {size: 'large'})
+	// .then(
+  //   console.log('url == ', url)
+  //   images => {
+  //   // console.log('url == ', url);
+	// 	/*
+	// 	[{
+	// 		'url': item.link,
+  //           'thumbnail':item.image.thumbnailLink,
+  //           'snippet':item.title,
+  //           'context': item.image.contextLink
+	// 	}]
+	// 	 */
+	// })
+	// .catch(
+  //   error => console.log(error)
+  //   );
  
+  console.log('image == ', client.search('you', {size: 'large'}));
+
   // clientImage.search(event.message.text);
 
   // 実行
