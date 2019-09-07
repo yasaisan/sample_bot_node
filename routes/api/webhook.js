@@ -3,6 +3,10 @@ const line = require('@line/bot-sdk');
 
 //翻訳
 const request = require('request');
+
+const { google } = require('googleapis');
+const customSearch = google.customsearch('v1');
+
 // 
 // const GoogleImages = require('google-images');
 // const clientImage = new GoogleImages('016901115011056515106:6pjbegaiuga', 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI');
@@ -39,13 +43,48 @@ function handleEvent(event) {
 
   // 翻訳するための文字列を生成します
 
-  // api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
-  // cse_id = '016901115011056515106:6pjbegaiuga'
+  var api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
+  var cse_id = '016901115011056515106:6pjbegaiuga'
 
   // client.search('Mahatma Gandhi', {size: 'large'});
  
  
- 
+  let itemUrls = [];
+
+  // do {
+    const result = await customSearch.cse.list({
+      cx: cse_id,
+      q: SEARCH_KEYWORD,
+      auth: api_key,
+      searchType: 'image',
+      safe: 'high',
+      num: searchNum, // max:10
+      start: startIndex + 1,
+    });
+
+    itemUrls = result.data.items.map(item => item.link);
+    console.log('itemUrls == ', itemUrls);
+    // result.data.items.forEach(item => {
+    //   startIndex += 1;
+
+    //   const mimeExt = item.mime.split('/').pop() || '';
+    //   const linkExt = path.extname(item.link).replace('.', '').split('?').shift() || '';
+
+      // const fileExt = mimeExt || linkExt || 'jpg';
+      // const fileBaseName = `${'0'.repeat(FILE_NAME_LENGTH)}${startIndex}`.slice(-FILE_NAME_LENGTH);
+
+      // downloader.push(
+      //   path.join(saveDir, `${fileBaseName}.${fileExt}`),
+      //   item.link
+      // );
+    // }
+    // );
+
+    // console.log(`画像URL取得中 : ${startIndex} / ${GET_ITEM_COUNT}`);
+
+  // } while (startIndex < GET_ITEM_COUNT || itemUrls.length < searchNum);
+
+
  
   // clientImage.search(event.message.text);
 
