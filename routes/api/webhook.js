@@ -44,20 +44,19 @@ function handleEvent(event) {
 
   // var api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
   // var cse_id = '016901115011056515106:6pjbegaiuga'
-
-  return clientImage.search('Mahatma Gandhi', {size: 'large'})
+  const options = {page:1,size:'large'};
+  return clientImage.search('Mahatma Gandhi', options)
 	.then(
-    images => {
-    console.log('url == ', url);
-		/*
-		[{
-			'url': item.link,
-            'thumbnail':item.image.thumbnailLink,
-            'snippet':item.title,
-            'context': item.image.contextLink
-		}]
-		 */
-  }
+    console.log('url == ', images)
+  //   images => {
+  //   console.log('url == ', images);
+  //   // [{
+  //   //   'url': item.link,
+  //   //   'thumbnail':item.image.thumbnailLink,
+  //   //   'snippet':item.title,
+  //   //   'context': item.image.contextLink
+  //   // }]
+  // }
   // client.replyMessage(event.replyToken, {
   //   type: 'text',
   //   text: translateText,
