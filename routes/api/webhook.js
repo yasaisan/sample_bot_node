@@ -50,15 +50,16 @@ function handleEvent(event) {
       cnt = 0;
       images.some(function(value){
         if( value.url.match( /^https:\/\// ) && value.thumbnail.match( /^https:\/\// ) ){
+            //  && value.url.match( /^https:\/\// )){
           console.log('url == ', value.url);
           console.log('thumbnail == ', value.thumbnail);
           replaimageyarry.push(
             {
-              "imageUrl": value.url,
-              "action": {
-                "type": "message",
-                "label": event.message.text,
-                "text": event.message.text
+              imageUrl: value.url,
+              action: {
+                type: 'message',
+                label: event.message.text,
+                text: event.message.text
               }
             }
           );
@@ -68,15 +69,35 @@ function handleEvent(event) {
       });
       console.log('replaimageyarry == ', replaimageyarry);
       arry = {
-        "type": "template",
-        "altText": "this is a image carousel template",
-        "template": {
-          "type": "image_carousel",
-          "columns": replaimageyarry
+        type: 'template',
+        altText: 'this is a image carousel template',
+        template: {
+          type: 'image_carousel',
+          columns: replaimageyarry
         }
       };
-      console.log('replayarry == ', arry);
-      return client.replyMessage(event.replyToken, arry);
+      // console.log('replayarry == ', arry);
+      //return client.replyMessage(event.replyToken, arry);
+      translateText = '';
+      replyMessageArray = [];
+      replyMessageArray.push(arry);
+      return getAccessToken(function (err, token) {
+        if (!err) {
+          // console.log(token);
+          translate(token, event.message.text, (err, translated) => {
+            if (!err) {
+              console.log('TransLate == ', event.message.text, '->', translated);
+              translateText = translated;
+              replyMessageArray.push({
+                type: 'text',
+                text: translateText,
+              });
+              client.replyMessage(event.replyToken, replyMessageArray);
+            }
+          });
+        }
+      });
+
       // [{
       //   'url': item.link,
       //   'thumbnail':item.image.thumbnailLink,
@@ -87,7 +108,7 @@ function handleEvent(event) {
   )
 	.catch(
     error => console.log(error)
-    );
+  );
  
   //console.log('image == ', clientImage.search('you', {size: 'large'}));
 
