@@ -72,6 +72,7 @@ function handleEvent(event) {
       }
       if (cnt == 3) return true; 
     });
+    console.log('replaimageyarry == ', replaimageyarry);
     // arry = {
     //   "type": "template",
     //   "altText": "this is a image carousel template",
@@ -107,7 +108,7 @@ function handleEvent(event) {
                     "action": {
                         "type": "message",
                         "label": "Yes",
-                        "text": "yes"
+                        "text": ""
                     }
                 }
             ]
