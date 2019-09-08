@@ -27,8 +27,6 @@ function handleEvent(event) {
     return;
   }
 
-  // console.log('handleEvent', );
-  // console.error('input' = ', event.message.text);
   console.log('inputTxt = ', event.message.text);
 
   /**
@@ -42,89 +40,51 @@ function handleEvent(event) {
 
   // 翻訳するための文字列を生成します
 
-  // var api_key = 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI'
-  // var cse_id = '016901115011056515106:6pjbegaiuga'
   const options = {page:1};
   clientImage.search(event.message.text, options)
 	.then(
     // console.log('url == ', images) 
     images => {
-    // console.log('images111 == ', images);
-    replaimageyarry = [];
-    cnt = 0;
-    images.some(function(value){
-      // console.log('images111 == ', value.url);
-      //replayarry = [];
-      if( value.url.match( /^https:\/\// ) && value.thumbnail.match( /^https:\/\// ) ){
-        console.log('url == ', value.url);
-        console.log('thumbnail == ', value.thumbnail);
-        replaimageyarry.push(
-          {
-              "imageUrl": value.thumbnail,
+      // console.log('images111 == ', images);
+      replaimageyarry = [];
+      cnt = 0;
+      images.some(function(value){
+        if( value.url.match( /^https:\/\// ) && value.thumbnail.match( /^https:\/\// ) ){
+          console.log('url == ', value.url);
+          console.log('thumbnail == ', value.thumbnail);
+          replaimageyarry.push(
+            {
+              "imageUrl": value.url,
               "action": {
-                  "type": "message",
-                  "label": event.message.text,
-                  "text": event.message.text
+                "type": "message",
+                "label": event.message.text,
+                "text": event.message.text
               }
-          }
-        );
-        cnt++;
-      }
-      if (cnt == 3) return true; 
-    });
-    console.log('replaimageyarry == ', replaimageyarry);
-    arry = {
-      "type": "template",
-      "altText": "this is a image carousel template",
-      "template": {
+            }
+          );
+          cnt++;
+        }
+        if (cnt == 3) return true; 
+      });
+      console.log('replaimageyarry == ', replaimageyarry);
+      arry = {
+        "type": "template",
+        "altText": "this is a image carousel template",
+        "template": {
           "type": "image_carousel",
           "columns": replaimageyarry
-      }
-    };
-    // arry = {
-    //     "type": "template",
-    //     "altText": "this is a image carousel template",
-    //     "template": {
-    //         "type": "image_carousel",
-    //         "columns": [
-    //             {
-    //                 "imageUrl": "https://example.com/test-cline/b01_img01.jpg",
-    //                 "action": {
-    //                     "type": "uri",
-    //                     "label": "View detail",
-    //                     "uri": "https://classmethod.jp/"
-    //                 }
-    //             },
-    //             {
-    //                 "imageUrl": "https://example.com/test-cline/b01_img02.jpg",
-    //                 "action": {
-    //                     "type": "postback",
-    //                     "label": "Buy",
-    //                     "data": "action=buy&itemid=111"
-    //                 }
-    //             },
-    //             {
-    //               "type": "image",
-    //               "originalContentUrl": "https://symfo.web.fc2.com/sample_src/line/cover1.jpg",
-    //               "previewImageUrl": "https://symfo.web.fc2.com/sample_src/line/cover1.jpg"
-    //             }
-    //         ]
-    //     }
-    // };
-    console.log('replayarry == ', arry);
-    return client.replyMessage(event.replyToken, arry);
-    // [{
-    //   'url': item.link,
-    //   'thumbnail':item.image.thumbnailLink,
-    //   'snippet':item.title,
-    //   'context': item.image.contextLink
-    // }]
-  }
-  // client.replyMessage(event.replyToken, {
-  //   type: 'text',
-  //   text: translateText,
-  // });
-    )
+        }
+      };
+      console.log('replayarry == ', arry);
+      return client.replyMessage(event.replyToken, arry);
+      // [{
+      //   'url': item.link,
+      //   'thumbnail':item.image.thumbnailLink,
+      //   'snippet':item.title,
+      //   'context': item.image.contextLink
+      // }]
+    }
+  )
 	.catch(
     error => console.log(error)
     );
@@ -150,13 +110,6 @@ function handleEvent(event) {
   //     });
   //   }
   // });
-
-
-  // console.log('Text == ', translateText);
-
-
-
-
 
 
 
