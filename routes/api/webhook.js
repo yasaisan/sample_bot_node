@@ -50,14 +50,18 @@ function handleEvent(event) {
     // console.log('url == ', images) 
     images => {
     // console.log('images111 == ', images);
+    replayarry = [];
     images.forEach(function(value){
       console.log('images111 == ', value.url);
-      client.replyMessage(event.replyToken, {
-        type: 'text',
-        text: value.url,
-      });
+      //replayarry = [];
+      replayarry.push(
+        {
+          "type": "image",
+          "originalContentUrl": value.url,
+          "previewImageUrl": value.thumbnail
+        });
     });
-    return true;
+    return client.replyMessage(event.replyToken, replayarry);
     // [{
     //   'url': item.link,
     //   'thumbnail':item.image.thumbnailLink,
