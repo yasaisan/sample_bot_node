@@ -104,12 +104,9 @@ function handleEvent(event) {
                     }
                 },
                 {
-                    "imageUrl": "https://example.com/test-cline/b01_img04.jpg",
-                    "action": {
-                        "type": "message",
-                        "label": "Yes",
-                        "text": ""
-                    }
+                  "type": "image",
+                  "originalContentUrl": "https://symfo.web.fc2.com/sample_src/line/cover1.jpg",
+                  "previewImageUrl": "https://symfo.web.fc2.com/sample_src/line/cover1.jpg"
                 }
             ]
         }
