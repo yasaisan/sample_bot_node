@@ -51,6 +51,7 @@ function handleEvent(event) {
     images => {
     // console.log('images111 == ', images);
     replayarry = [];
+    cnt = 0;
     images.forEach(function(value){
       console.log('images111 == ', value.url);
       //replayarry = [];
@@ -61,8 +62,11 @@ function handleEvent(event) {
             "originalContentUrl": value.url,
             "previewImageUrl": value.thumbnail
           });
+          cnt++;
       }
+      if (cnt = 3) break; 
     });
+    console.log('replayarry == ', replayarry);
     return client.replyMessage(event.replyToken, replayarry);
     // [{
     //   'url': item.link,
