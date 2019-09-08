@@ -53,9 +53,11 @@ function handleEvent(event) {
     replayarry = [];
     cnt = 0;
     images.some(function(value){
-      console.log('images111 == ', value.url);
+      // console.log('images111 == ', value.url);
       //replayarry = [];
       if( value.url.match( /^https?:\/\// ) && value.thumbnail.match( /^https?:\/\// ) ){
+        console.log('url == ', value.url);
+        console.log('thumbnail == ', value.thumbnail);
         replayarry.push(
           {
             "type": "image",
