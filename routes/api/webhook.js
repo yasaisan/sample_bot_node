@@ -50,7 +50,7 @@ function handleEvent(event) {
     // console.log('url == ', images) 
     images => {
     // console.log('images111 == ', images);
-    replayarry = [];
+    replaimageyarry = [];
     cnt = 0;
     images.some(function(value){
       // console.log('images111 == ', value.url);
@@ -58,19 +58,30 @@ function handleEvent(event) {
       if( value.url.match( /^https:\/\// ) && value.thumbnail.match( /^https:\/\// ) ){
         console.log('url == ', value.url);
         console.log('thumbnail == ', value.thumbnail);
-        replayarry.push(
+        replaimageyarry.push(
           {
-            "type": "image",
-            "originalContentUrl": value.url,
-            "previewImageUrl": value.thumbnail
+              "imageUrl": value.thumbnail,
+              "action": {
+                  "type": "message",
+                  "label": event.message.text,
+                  "text": ""
+              }
           }
         );
         cnt++;
       }
       if (cnt == 3) return true; 
     });
-    console.log('replayarry == ', replayarry);
-    return client.replyMessage(event.replyToken, replayarry);
+    arry = {
+      "type": "template",
+      "altText": "this is a image carousel template",
+      "template": {
+          "type": "image_carousel",
+          "columns": replaimageyarry
+      }
+  };
+    console.log('replayarry == ', arry);
+    return client.replyMessage(event.replyToken, arry);
     // [{
     //   'url': item.link,
     //   'thumbnail':item.image.thumbnailLink,
