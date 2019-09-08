@@ -72,14 +72,47 @@ function handleEvent(event) {
       }
       if (cnt == 3) return true; 
     });
+    // arry = {
+    //   "type": "template",
+    //   "altText": "this is a image carousel template",
+    //   "template": {
+    //       "type": "image_carousel",
+    //       "columns": replaimageyarry
+    //   }
+    // };
     arry = {
-      "type": "template",
-      "altText": "this is a image carousel template",
-      "template": {
-          "type": "image_carousel",
-          "columns": replaimageyarry
-      }
-  };
+        "type": "template",
+        "altText": "this is a image carousel template",
+        "template": {
+            "type": "image_carousel",
+            "columns": [
+                {
+                    "imageUrl": "https://example.com/test-cline/b01_img01.jpg",
+                    "action": {
+                        "type": "uri",
+                        "label": "View detail",
+                        "uri": "https://classmethod.jp/"
+                    }
+                },
+                {
+                    "imageUrl": "https://example.com/test-cline/b01_img02.jpg",
+                    "action": {
+                        "type": "postback",
+                        "label": "Buy",
+                        "data": "action=buy&itemid=111"
+                    }
+                },
+                {
+                    "imageUrl": "https://example.com/test-cline/b01_img04.jpg",
+                    "action": {
+                        "type": "message",
+                        "label": "Yes",
+                        "text": "yes"
+                    }
+                }
+            ]
+        }
+    };
     console.log('replayarry == ', arry);
     return client.replyMessage(event.replyToken, arry);
     // [{
