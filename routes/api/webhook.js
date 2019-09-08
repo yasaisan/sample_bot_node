@@ -52,7 +52,7 @@ function handleEvent(event) {
     // console.log('images111 == ', images);
     replayarry = [];
     cnt = 0;
-    images.forEach(function(value){
+    images.some(function(value){
       console.log('images111 == ', value.url);
       //replayarry = [];
       if( value.url.match( /^https?:\/\// ) && value.thumbnail.match( /^https?:\/\// ) ){
@@ -61,10 +61,11 @@ function handleEvent(event) {
             "type": "image",
             "originalContentUrl": value.url,
             "previewImageUrl": value.thumbnail
-          });
-          cnt++;
+          }
+        );
+        cnt++;
       }
-      if (cnt = 3) break; 
+      if (cnt == 3) return true; 
     });
     console.log('replayarry == ', replayarry);
     return client.replyMessage(event.replyToken, replayarry);
