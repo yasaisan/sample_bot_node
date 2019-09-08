@@ -54,12 +54,14 @@ function handleEvent(event) {
     images.forEach(function(value){
       console.log('images111 == ', value.url);
       //replayarry = [];
-      replayarry.push(
-        {
-          "type": "image",
-          "originalContentUrl": value.url,
-          "previewImageUrl": value.thumbnail
-        });
+      if( value.url.match( /^https?:\/\// ) && value.thumbnail.match( /^https?:\/\// ) ){
+        replayarry.push(
+          {
+            "type": "image",
+            "originalContentUrl": value.url,
+            "previewImageUrl": value.thumbnail
+          });
+      }
     });
     return client.replyMessage(event.replyToken, replayarry);
     // [{
