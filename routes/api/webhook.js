@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const line = require('@line/bot-sdk');
 
-//翻訳
+// 翻訳
 const request = require('request');
-
+// image検索
 const imageSearch = require('image-search-google');
 const clientImage = new imageSearch('016901115011056515106:6pjbegaiuga', 'AIzaSyCqe72UGyiLECERkWVTvOLXdFJxYvVspTI');
 // 
@@ -40,7 +40,10 @@ function handleEvent(event) {
 
   // 翻訳するための文字列を生成します
 
-  const options = {page:1};
+  const options = {
+    page:1
+  };
+
   clientImage.search(event.message.text, options)
 	.then(
     // console.log('url == ', images) 
@@ -81,6 +84,7 @@ function handleEvent(event) {
       translateText = '';
       replyMessageArray = [];
       replyMessageArray.push(arry);
+
       return getAccessToken(function (err, token) {
         if (!err) {
           // console.log(token);
@@ -88,10 +92,23 @@ function handleEvent(event) {
             if (!err) {
               console.log('TransLate == ', event.message.text, '->', translated);
               translateText = translated;
-              replyMessageArray.push({
+              replyMessageArray.unshift({
                 type: 'text',
                 text: translateText,
               });
+              replyMessageArray.push({
+                type: 'template',
+                altText: '登録しますか？',
+                template: {
+                  type: 'confirm',
+                  text: '登録しますか？',
+                  actions: [
+                    { label: 'Yes', type: 'message', text: 'Yes!' },
+                    { label: 'No', type: 'message', text: 'No!' },
+                  ],
+                }
+              });
+
               client.replyMessage(event.replyToken, replyMessageArray);
             }
           });
